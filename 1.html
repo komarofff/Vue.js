@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<div id="qqq"></div>
+
+</body>
+<script>
+  const formContainer = document.getElementById('qqq');
+  formContainer.innerHTML = '<p class="ddd">click</p><input type="email" name="email" required>';
+  formContainer.querySelector('.ddd').addEventListener('click', function (e) {
+  alert("click")
+  });
+</script>
+</html>
+$table->id();
+$table->text('title');
+$table->string('location');
+$table->string('category');
+$table->string('type');
+$table->integer('floors');
+$table->integer('buildDate');
+$table->integer('rooms');
+$table->integer('buildingSize');
+$table->integer('landSize');
+$table->string('roi');
+$table->integer('zoning');
+$table->string('previewImage');
+$table->longText('images');
+$table->timestamp('created_at');
+$table->longText('address');
+$table->text('mapCoordinate');
