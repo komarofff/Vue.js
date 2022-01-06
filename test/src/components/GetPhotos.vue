@@ -28,7 +28,7 @@
 
       </div>
     </template>
-    <p v-if="item.length == 0" class="col-start-1 col-end-4 text-lg text-gray-700">No photos found on this date.</p>
+    <p v-if="item.length == 0" class="col-start-1 col-end-5  text-lg text-gray-700">No photos found on this date.</p>
   </div>
 
 
@@ -56,16 +56,11 @@ export default {
     getData() {
       this.amountOfPhotos = this.amount
 
-        this.query = 'https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos?api_key=jQilTRWcRu4qDJtVc2NSQlqEAMCALh7zLDmzoDOT&earth_date=' + this.date 
+        this.query = `https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos?api_key=jQilTRWcRu4qDJtVc2NSQlqEAMCALh7zLDmzoDOT&earth_date=${this.date}`
         axios.get(this.query)
             .then(response => {
               this.dataFromServer = response.data
             })
-
-      // axios.get('https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos?api_key=jQilTRWcRu4qDJtVc2NSQlqEAMCALh7zLDmzoDOT&earth_date=' + this.date + '&page=' + this.page)
-      //     .then(response => {
-      //       this.dataFromServer = response.data
-      //     })
     }
   }
 }
