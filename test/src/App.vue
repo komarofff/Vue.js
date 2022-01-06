@@ -1,22 +1,39 @@
 <template>
   <div class="container mx-auto flex flex-col justify-start items-center px-2">
   <img src="../public/nasa.png" class="mb-12">
-  <GetPhotos></GetPhotos>
+  <GetPhotos
+  @startGallery="Show()"
+  ></GetPhotos>
   </div>
+
+  <template v-if="showGallery">
+    <gallery @closeGallery="Close()"></gallery>
+  </template>
+
 </template>
 
 <script>
-
+import Gallery from "./components/Gallery";
 import GetPhotos from "./components/GetPhotos";
 export default {
   data(){
     return {
-      listOfPhotos: {}
+      showGallery: false
     }
+  },
+  methods:{
+    Show(){
+      this.showGallery = true
+    },
+    Close(){
+      this.showGallery = false
+    },
+
   },
   name: 'App',
   components: {
-    GetPhotos
+    GetPhotos,
+    Gallery
   }
 }
 </script>
