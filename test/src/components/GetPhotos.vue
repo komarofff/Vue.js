@@ -56,7 +56,6 @@ export default {
   computed: {
     getData() {
       this.amountOfPhotos = this.amount
-
       this.query = `https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos?api_key=jQilTRWcRu4qDJtVc2NSQlqEAMCALh7zLDmzoDOT&earth_date=${this.date}`
       axios.get(this.query)
           .then(response => {
