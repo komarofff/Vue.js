@@ -2,16 +2,18 @@
 gallery
   <button @click="Close()"> close gallery</button>
   <br>
-  {{ index }}
+  <hr>
+  {{ index}}
+<hr>
 
-  {{ photosData }}
+  {{ dataForGallery }}
 </template>
 
 <script>
 
 export default {
   emits: ['closeGallery'],
-  props: ['index','photosData'],
+  props: ['dataForGallery','index'],
   name: "Gallery",
   methods: {
     Close(){

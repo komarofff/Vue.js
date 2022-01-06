@@ -20,7 +20,7 @@
 
   <div v-for="item in dataFromServer" class="min-w-screen  grid grid-cols-1 md:grid-cols-4 gap-20">
     <template v-for="(photo,idx) in item">
-      <div v-if="idx < amountOfPhotos" @click="openGallery()"
+      <div v-if="idx < amountOfPhotos" @click="openGallery(idx)"
            class="flex flex-col justify-start items-center border-2 border-gray-200 bg-white self-straight rounded cursor-pointer" >
         <img :src="photo.img_src" class="w-full h-full object-cover"
             >
@@ -65,8 +65,8 @@ export default {
     }
   },
   methods:{
-    openGallery(){
-      this.$emit('startGallery',this.dataFromServer)
+    openGallery(idx){
+      this.$emit('startGallery',this.dataFromServer,idx)
     }
   }
 }
