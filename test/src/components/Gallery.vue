@@ -1,13 +1,24 @@
 <template>
 gallery
-  <button @click="$emit('closeGallery')"> close gallery</button>
+  <button @click="Close()"> close gallery</button>
+  <br>
+  {{ index }}
+
+  {{ photosData }}
 </template>
 
 <script>
 
 export default {
   emits: ['closeGallery'],
-  name: "Gallery"
+  props: ['index','photosData'],
+  name: "Gallery",
+  methods: {
+    Close(){
+      this.$emit('closeGallery')
+    }
+  }
+
 }
 </script>
 

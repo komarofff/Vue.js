@@ -20,13 +20,12 @@
 
   <div v-for="item in dataFromServer" class="min-w-screen  grid grid-cols-1 md:grid-cols-4 gap-20">
     <template v-for="(photo,idx) in item">
-      <div v-if="idx < amountOfPhotos"
-           @click="$emit('startGallery', idx)"
-          class="flex flex-col justify-start items-center border-2 border-gray-200 bg-white self-straight rounded">
-        <img :src="photo.img_src" class="w-full h-full object-cover">
+      <div v-if="idx < amountOfPhotos" @click="openGallery()"
+           class="flex flex-col justify-start items-center border-2 border-gray-200 bg-white self-straight rounded cursor-pointer" >
+        <img :src="photo.img_src" class="w-full h-full object-cover"
+            >
         <p class="text-xl">{{ photo.id }}</p>
         <p>{{ photo.earth_date }}</p>
-
       </div>
     </template>
     <p v-if="item.length == 0" class="col-start-1 col-end-5  text-lg text-gray-700">No photos found on this date.</p>
@@ -39,7 +38,7 @@
 import axios from "axios";
 
 export default {
-  emits:['startGallery'],
+  emits: ['startGallery'],
   data() {
     return {
       today: new Date(),
@@ -58,13 +57,18 @@ export default {
     getData() {
       this.amountOfPhotos = this.amount
 
-        this.query = `https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos?api_key=jQilTRWcRu4qDJtVc2NSQlqEAMCALh7zLDmzoDOT&earth_date=${this.date}`
-        axios.get(this.query)
-            .then(response => {
-              this.dataFromServer = response.data
-            })
+      this.query = `https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos?api_key=jQilTRWcRu4qDJtVc2NSQlqEAMCALh7zLDmzoDOT&earth_date=${this.date}`
+      axios.get(this.query)
+          .then(response => {
+            this.dataFromServer = response.data
+          })
     }
   },
+  methods:{
+    openGallery(){
+      this.$emit('startGallery',this.dataFromServer)
+    }
+  }
 }
 </script>
 
