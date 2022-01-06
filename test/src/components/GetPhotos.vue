@@ -1,5 +1,5 @@
 <template>
-
+  {{ query }}
   <div class="w-full lg:w-8/12 mx-auto grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-20 items-end mb-6">
     <div class="flex flex-col justify-start items-center w-full ">
       <p class="mb-2 text-lg">Number of images:</p>
@@ -19,13 +19,15 @@
   </div>
 
   <div v-for="item in dataFromServer" class="min-w-screen  grid grid-cols-1 md:grid-cols-4 gap-20">
+    <template v-for="(photo,idx) in item">
+      <div v-if="idx < amountOfPhotos"
+          class="flex flex-col justify-start items-center border-2 border-gray-200 bg-white self-straight rounded">
+        <img :src="photo.img_src" class="w-full h-full object-cover">
+        <p class="text-xl">{{ photo.id }}</p>
+        <p>{{ photo.earth_date }}</p>
 
-    <div v-for="photo in item" v-if="item.length > 0"
-         class="flex flex-col justify-start items-center border-2 border-gray-200 bg-white self-straight rounded">
-      <img :src="photo.img_src" class="w-full" >
-      <p class="text-xl">{{ photo.id }}</p>
-      <p>{{ photo.earth_date }}</p>
-    </div>
+      </div>
+    </template>
     <p v-if="item.length == 0" class="col-start-1 col-end-4 text-lg text-gray-700">No photos found on this date.</p>
   </div>
 
@@ -39,18 +41,31 @@ export default {
   data() {
     return {
       today: new Date(),
-      dataFromServer: {},
-      totalPhotos: 20,
+      dataFromServer: [],
       amount: 1,
+      amountOfPhotos: 0,
+      page: 1,
       date: new Date().getFullYear() + '-' + ('0' + (new Date().getMonth() + 1)).slice(-2) + '-' + ('0' + (new Date().getDate())).slice(-2),
+      query: null
     }
+  },
+  beforeMount() {
+    this.query = `https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos?api_key=jQilTRWcRu4qDJtVc2NSQlqEAMCALh7zLDmzoDOT&earth_date=${this.date}`
   },
   computed: {
     getData() {
-      axios.get('https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos?api_key=jQilTRWcRu4qDJtVc2NSQlqEAMCALh7zLDmzoDOT&earth_date=' + this.date + '&total_photos=' + this.totalPhotos)
-          .then(response => {
-            this.dataFromServer = response.data
-          })
+      this.amountOfPhotos = this.amount
+
+        this.query = 'https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos?api_key=jQilTRWcRu4qDJtVc2NSQlqEAMCALh7zLDmzoDOT&earth_date=' + this.date 
+        axios.get(this.query)
+            .then(response => {
+              this.dataFromServer = response.data
+            })
+
+      // axios.get('https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos?api_key=jQilTRWcRu4qDJtVc2NSQlqEAMCALh7zLDmzoDOT&earth_date=' + this.date + '&page=' + this.page)
+      //     .then(response => {
+      //       this.dataFromServer = response.data
+      //     })
     }
   }
 }
