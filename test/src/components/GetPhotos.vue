@@ -66,7 +66,7 @@ export default {
   },
   methods:{
     openGallery(idx){
-      this.$emit('startGallery',this.dataFromServer,idx)
+      this.$emit('startGallery',this.dataFromServer,idx,this.amount)
     }
   }
 }

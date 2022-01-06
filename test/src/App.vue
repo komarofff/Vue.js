@@ -9,6 +9,7 @@
     <gallery
         :dataForGallery = "dataForGallery"
         :index="idx"
+        :amount="amount"
         @closeGallery="closeShow"
     ></gallery>
   </template>
@@ -23,15 +24,17 @@ export default {
     return {
       showGallery: false,
       dataForGallery: [],
-      idx: 0
+      idx: 0,
+      amount: 0
 
     }
   },
   methods: {
-    startShow(someData,idxStart) {
+    startShow(someData,idxStart,amountOfPhotos) {
       this.showGallery = true
       this.dataForGallery =  someData
       this.idx = idxStart
+      this.amount = amountOfPhotos
     },
     closeShow() {
       this.showGallery = false
