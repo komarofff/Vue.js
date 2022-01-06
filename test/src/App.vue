@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-col justify-start items-center">
+  <div class="container mx-auto flex flex-col justify-start items-center">
   <img src="../public/nasa.png" class="mb-12">
   <GetPhotos></GetPhotos>
   </div>
@@ -23,6 +23,6 @@ export default {
 
 <style>
 #app {
-  font-family: 'Space Grotesk', sans-serif;
+  font-family: 'Space Grotesk';
 }
 </style>

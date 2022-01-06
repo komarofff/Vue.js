@@ -1,11 +1,14 @@
 <template>
+
   <div class="w-7/12 mx-auto grid grid-cols-3 gap-20 items-end mb-6">
     <div class="flex flex-col justify-start items-center w-full ">
       <label class="mb-2 text-lg">Number of images:</label>
-      <select v-model="amount"
-              class="border border-gray-200 text-xl rounded-lg w-full p-2 h-12 focus:border-4 focus:border-blue-200 outline-none">
-        <option v-for="i in 50">{{ i }}</option>
-      </select>
+<!--      <select v-model="amount"-->
+<!--              class="border border-gray-200 text-xl rounded-lg w-full p-2 h-12 focus:border-4 focus:border-blue-200 outline-none">-->
+<!--        <option v-for="i in 50">{{ i }}</option>-->
+<!--      </select>-->
+      <input type="number" min="1" max="50" v-model="amount"
+             class="border border-gray-200 text-xl rounded-lg w-full p-2 h-12 focus:border-4 focus:border-blue-200 outline-none">
     </div>
     <div class="flex flex-col justify-start items-center w-full ">
       <label class="mb-2 text-lg">Select date:</label>
@@ -22,9 +25,9 @@
   <div v-for="item in dataFromServer" class="min-w-screen  grid grid-cols-4 gap-20">
 
     <div v-for="photo in item" v-if="item.length > 0"
-         class="flex flex-col justify-start items-center border border-gray-100 bg-white self-straight">
+         class="flex flex-col justify-start items-center border-2 border-gray-200 bg-white self-straight rounded">
       <img :src="photo.img_src" class="w-full">
-      <p>{{ photo.id }}</p>
+      <p class="text-xl">{{ photo.id }}</p>
       <p>{{ photo.earth_date }}</p>
     </div>
     <p v-if="item.length == 0" class="col-start-1 col-end-4 text-lg text-gray-700">No photos found on this date.</p>
@@ -41,10 +44,9 @@ export default {
     return {
       today: new Date(),
       dataFromServer: {},
-      //date: new Date().getFullYear() + '-' + (new Date().getMonth() + 1) + '-' + (new Date().getDate() - 1),
       totalPhotos: 20,
-      amount: 0,
-       date: new Date().getFullYear() + '-' + ('0'+ (new Date().getMonth() + 1)).slice(-2) + '-' + ('0'+ (new Date().getDate())).slice(-2),
+      amount: 1,
+      date: new Date().getFullYear() + '-' + ('0' + (new Date().getMonth() + 1)).slice(-2) + '-' + ('0' + (new Date().getDate())).slice(-2),
     }
   },
   computed: {
